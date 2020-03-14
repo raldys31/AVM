@@ -71,4 +71,59 @@ public class Ballot {
 		}
 		return false; //Candidate wasn't found, so return false
 	}
+	
+	//Method to check if ballot is valid
+		public static boolean validBallot(Ballot ballot, int totalCandidates) {
+
+			//If there are k candidates ranked, then 0 to k elements should be 1, else invalid ballot
+			LinkedList<Integer> checkC = new LinkedList<Integer>(); 
+			//Check count of ranks, uses same logic as above
+			LinkedList<Integer> checkB = new LinkedList<Integer>(); 
+
+			int candidatesNum = ballot.candidates.size();
+
+			//Initialize arrays to zero
+			for (int i = 0; i < totalCandidates; i++) {
+				checkC.add(0);
+				checkB.add(0);
+			}
+
+			for (String vote: ballot.candidates) {
+				String[] data = vote.split(":");
+				if (Integer.valueOf(data[0]) > totalCandidates || Integer.valueOf(data[1]) > candidatesNum) {
+					return false;
+				}
+
+				//For candidate c:i, add one count in checkC
+				checkC.set(Integer.valueOf(data[0]) - 1, checkC.get(Integer.valueOf(data[0]) - 1) + 1);
+
+				//For candidate x, add one count in checkB
+				checkB.set(Integer.valueOf(data[1]) - 1, checkB.get(Integer.valueOf(data[1]) - 1) + 1);
+
+			}
+
+			//Now we check for ranks from 0 to k-1. Values must be one on every check
+			for (int i = 0; i < candidatesNum; i++) {
+				if (checkB.get(i) != 1) {
+					return false;
+				}
+			}
+
+			int sum = 0;
+			//Check all candidate sums. Candidates sum must equal 1
+			for (int i = 0; i < totalCandidates; i++) {
+				if (checkC.get(i) > 1) {
+					return false;
+				}
+				else if (checkC.get(i) == 1) {
+					sum++;
+				}
+			}
+
+			//Checks for repeating candidates
+			if (sum != candidatesNum) {
+				return false;
+			}
+			return true;
+		}
 }
