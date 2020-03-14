@@ -1,3 +1,8 @@
+/**
+ * @author Raldys Y. Cruz Serrano
+ *
+ */
+
 public class Candidate {
 
 	public String name;
@@ -17,7 +22,7 @@ public class Candidate {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public int getScore() {
 		return score;
 	}
@@ -25,7 +30,7 @@ public class Candidate {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
+
 	public void addScore() {
 		this.score++;
 	}

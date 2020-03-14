@@ -6,6 +6,11 @@ import java.io.IOException;
 
 import collections.list.LinkedList;
 
+/**
+ * @author Raldys Y. Cruz Serrano
+ *
+ */
+
 public class Election {
 
 	public static void main(String[] args) throws Exception {
@@ -132,9 +137,7 @@ public class Election {
 		LinkedList<Integer> tied = new LinkedList<Integer>(); // Holds candidate with same bottom scores
 
 		while (true) {
-
 			round++;
-
 			for (int rank = 1; rank <= candidatesNum; rank++) {
 
 				//Count votes for all candidates
